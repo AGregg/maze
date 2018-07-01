@@ -1,11 +1,8 @@
 class Square:
-    def __init__(self, x, y, parent, end_square):
+    def __init__(self, x, y, parent):
         self.x = x
         self.y = y
         self.parent = parent
-        if end_square:
-            self.end_square = end_square
-            self.distance_to_end = self.distance(end_square)
         if parent:
             self.distance_traversed = parent.distance_traversed + 1
         else:
@@ -20,20 +17,17 @@ class Square:
     def __hash__(self):
         return hash(self.__key())
 
-    def distance(self, square):
+    def distance_to_square(self, square):
         return abs(square.x - self.x) + abs(square.y - self.y)
-
-    def heuristic(self):
-        return self.distance_traversed + self.distance_to_end
 
     def adjacent_squares(self, maze):
         adjacent_squares = set()
         if maze[self.x + 1][self.y] == "_":
-            adjacent_squares.add(Square(self.x + 1, self.y, self, self.end_square))
+            adjacent_squares.add(Square(self.x + 1, self.y, self))
         if maze[self.x - 1][self.y] == "_":
-            adjacent_squares.add(Square(self.x - 1, self.y, self, self.end_square))
+            adjacent_squares.add(Square(self.x - 1, self.y, self))
         if maze[self.x][self.y + 1] == "_":
-            adjacent_squares.add(Square(self.x, self.y + 1, self, self.end_square))
+            adjacent_squares.add(Square(self.x, self.y + 1, self))
         if maze[self.x][self.y - 1] == "_":
-            adjacent_squares.add(Square(self.x, self.y - 1, self, self.end_square))
+            adjacent_squares.add(Square(self.x, self.y - 1, self))
         return adjacent_squares
