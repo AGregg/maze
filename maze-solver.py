@@ -37,10 +37,10 @@ while len(frontier):
         h = adjacent_square.heuristic()
         heapq.heappush(frontier, (h, count, adjacent_square))
 
+current = end_square
+while current:
+    maze_array[current.x][current.y] = alphabet[current.distance_traversed % 26]
+    curr = curr.parent
+
 for line in maze_array:
     print(*line)
-
-curr = end_square
-while curr:
-    print('result %d,%d,distance%d' % (curr.x, curr.y, curr.distance_traversed))
-    curr = curr.parent
