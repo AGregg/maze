@@ -40,7 +40,7 @@ while len(frontier):
 current = end_square
 while current:
     maze_array[current.x][current.y] = alphabet[current.distance_traversed % 26]
-    curr = curr.parent
+    current = current.parent
 
 for line in maze_array:
     print(*line)
