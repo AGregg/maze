@@ -1,7 +1,6 @@
 from square import *
 import heapq
 
-alphabet = "abcdefghijklmnopqrstuvwxyz"
 with open("maze.txt") as maze:
     maze_array = [list(line.strip()) for line in maze]
 
@@ -38,6 +37,7 @@ while len(frontier):
         heapq.heappush(frontier, (h, count, adjacent_square))
 
 current = end_square
+alphabet = "abcdefghijklmnopqrstuvwxyz"
 while current:
     maze_array[current.x][current.y] = alphabet[current.distance_traversed % 26]
     current = current.parent
